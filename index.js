@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import  'express-async-errors'
 import { authMiddleware,ResponseHandler ,globalErrorHandler,log} from './common/index.js';
-
+import publisherRouter from './app/routes.js';
 
 
 process.env.TZ = process.env.TIMEZONE;
@@ -17,17 +17,28 @@ dotenv.config() // Dot env Package Initialize
 // Middleware to parse URL-encoded data in the request body
 app.use(express.urlencoded({ extended: true }));
 
-
-
-
-
-
-
-
-
 //^ Global Error Handler
- app.use(globalErrorHandler);
- app.use(authMiddleware)
+app.use(globalErrorHandler);
+app.use(authMiddleware)
+
+
+
+
+// Routes for the application
+
+
+app.use('/publisher',publisherRouter)
+
+
+
+// End of Routes for the application
+
+
+
+
+
+
+
 
 
 // Redirect all Unknown requests to 404 page and send a response with status code 404.
