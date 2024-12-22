@@ -6,9 +6,9 @@ class PublisherRepo{
 
     // Function to get single publisher by id
     getPublisherById = async (publisherId ) => {
-        const query = 'SELECT * FROM publishers WHERE id = ?';
+        const query = 'SELECT * FROM tp_publishers WHERE tp_publisher_id  = ?';
 
-        return SqlServices.selectData(query, [publisherId])
+        return SqlServices.getData(query, [publisherId])
             .then(results => {
                 if (results.length > 0) {
                     return results;
@@ -40,12 +40,14 @@ class PublisherRepo{
     }
 
 
+    
     async addPublisher(publisherData) {
-        const query = 'INSERT INTO publishers SET ?';
-
+        // Manually construct the query string
+        const keys = Object.keys(publisherData).map(key => `${key} = ?`).join(', ');
+        const values = Object.values(publisherData);
+        const fullQuery = `INSERT INTO tp_publishers SET ${keys}`;
         try {
-            const results = await SqlServices.getData(query,publisherData);
-            return results;
+            return  await SqlServices.insertData(fullQuery,values);
         } catch (err) {
             return "Error adding publisher: " + err;
         }

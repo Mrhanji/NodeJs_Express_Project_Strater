@@ -3,13 +3,13 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import  'express-async-errors'
 import { authMiddleware,ResponseHandler ,globalErrorHandler,log} from './common/index.js';
-import publisherRouter from './app/routes.js';
+import appRoutes from './app/app_routes.js';
 
 
 process.env.TZ = process.env.TIMEZONE;
 const app = express()
 app.use(express.json());
-app.use(cors()); //* for Cross site access..
+app.use(cors()); //* for Cross site access
 dotenv.config() // Dot env Package Initialize
 
 
@@ -27,7 +27,7 @@ app.use(authMiddleware)
 // Routes for the application
 
 
-app.use('/publisher',publisherRouter)
+app.use('/',appRoutes)
 
 
 

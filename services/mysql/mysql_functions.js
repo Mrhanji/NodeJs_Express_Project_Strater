@@ -19,7 +19,8 @@ class SqlService {
         let connection;
         try {
             connection = await dbConnection.getConnection();
-            const [result] = await connection.execute(query, params);
+        const [result] = await connection.query(query, params);
+        
             return result.insertId;
         } catch (error) {
             console.error('Error inserting data:', error);
