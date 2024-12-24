@@ -15,4 +15,4 @@ router.get('/getSchoolByFilter', async (req, res) => {
 
 
 
-export  {router};
+export  default router;
