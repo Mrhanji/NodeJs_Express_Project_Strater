@@ -27,6 +27,15 @@ class  StatusController {
         }
     }
 
+    updateStatus = async (req, res) => {
+        try {
+            const result = await status.updateStatus(req.body);
+            return ResponseHandler.success(res, result);
+        } catch (err) {
+            return ResponseHandler.error(res, err, 500);
+        }
+    }
+
 }
 
 export   {StatusController}

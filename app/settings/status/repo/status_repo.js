@@ -52,17 +52,19 @@ class  StatusRepo{
 
     }
 
+
     updateStatus = async (statusData) => {
         // Manually construct the query string
         const keys = Object.keys(statusData).map(key => `${key} = ?`).join(', ');
         const values = Object.values(statusData);
-        const fullQuery = `UPDATE tp_status SET ${keys} WHERE tp_status_id = ?`;
+        const fullQuery = `UPDATE tp_account_status SET ${keys} WHERE tp_status_id = `+ statusData.tp_status_id;
         try {
             return  await SqlServices.updateData(fullQuery,values);
         } catch (err) {
             return "Error updating status: " + err;
         }
     }
+
 
 
 

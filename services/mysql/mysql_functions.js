@@ -34,7 +34,7 @@ class SqlService {
         let connection;
         try {
             connection = await dbConnection.getConnection();
-            const [result] = await connection.execute(query, params);
+            const [result] = await connection.query(query, params);
             return result.affectedRows;
         } catch (error) {
             console.error('Error updating data:', error);
